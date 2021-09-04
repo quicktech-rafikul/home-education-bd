@@ -6,6 +6,7 @@ Description: QuickTech IT maintain standard quality for Website and Creative Des
 
 import 'dart:async';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educationbd/Models/CentralTestExamModel.dart';
 import 'package:educationbd/Screens/Utils/BottomBar.dart';
@@ -186,14 +187,21 @@ class _QuickTechIT_CentralTestsState extends State<QuickTechIT_CentralTests> {
                       )),
                     );
                   } else {
-                    return ListView(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      children: snapshot.data
+                    return CarouselSlider(
+                      options: CarouselOptions(
+                        height: 130.0,
+                        enlargeCenterPage: true,
+                        autoPlay: true,
+                        aspectRatio: 16 / 9,
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        enableInfiniteScroll: true,
+                        autoPlayAnimationDuration: Duration(milliseconds: 800),
+                        viewportFraction: 0.8,
+                      ),
+                      items: snapshot.data
                           .map<Widget>((DocumentSnapshot document) {
                         CentralTestExamModel model =
                             CentralTestExamModel.fromDocumentSnapshot(document);
-
                         return examItemUI(model);
                       }).toList(),
                     );
@@ -250,72 +258,87 @@ class _QuickTechIT_CentralTestsState extends State<QuickTechIT_CentralTests> {
   }
 
   examItemUI(CentralTestExamModel item) {
-    return Container(
+    return InkWell(
+      onTap: () {
+        Get.toNamed('/examPage/central/${item.id}');
+      },
       child: Container(
-        color: UIColors.bgc2,
-        padding: EdgeInsets.all(8),
-        child: new Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: Get.width,
-              child: Text(
-                item.examName,
-                style: TextStyle(
-                    fontSize: ResponsiveFlutter.of(context).fontSize(2.5),
-                    color: UIColors.textcolor,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Mark: ${item.totalMark}',
-                  style: TextStyle(
-                    fontSize: ResponsiveFlutter.of(context).fontSize(2),
-                    color: UIColors.textcolor,
-                  ),
-                ),
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Duration: ${item.duration}',
-                        style: TextStyle(
-                          fontSize: ResponsiveFlutter.of(context).fontSize(2),
-                          color: UIColors.textcolor,
-                        ),
-                      ),
-                      Text(
-                        'Start Time: ${item.startTime}',
-                        style: TextStyle(
-                          fontSize: ResponsiveFlutter.of(context).fontSize(2),
-                          color: UIColors.textcolor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            Container(
-              child: TextButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(UIColors.primaryColor),
-                      padding: MaterialStateProperty.all(
-                          EdgeInsets.fromLTRB(20, 5, 20, 5))),
-                  onPressed: () {
-                    Get.toNamed('/examPage/central/${item.id}');
-                  },
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          gradient: LinearGradient(
+            colors: [
+              const Color(0xFF485563),
+              const Color(0xFF596164),
+            ],
+            begin: const FractionalOffset(0.0, 0.5),
+            end: const FractionalOffset(1.5, 0.0),
+            stops: [0.0, 1.0],
+            tileMode: TileMode.mirror,
+          ),
+        ),
+        child: Container(
+          //color: UIColors.bgc2,
+          padding: EdgeInsets.only(top: 10, left: 20),
+          child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: Get.width,
+                child: Center(
                   child: Text(
-                    "Attend Exam",
-                    style: TextStyle(color: Colors.white),
-                  )),
-            )
-          ],
+                    item.examName,
+                    style: TextStyle(
+                        fontSize: ResponsiveFlutter.of(context).fontSize(2.5),
+                        color: UIColors.textcolor,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Mark: ${item.totalMark}',
+                          style: TextStyle(
+                            fontSize: ResponsiveFlutter.of(context).fontSize(2),
+                            color: UIColors.textcolor,
+                          ),
+                        ),
+                        Text(
+                          'Eaxm Duration: ${item.duration} Minutes',
+                          style: TextStyle(
+                            fontSize: ResponsiveFlutter.of(context).fontSize(2),
+                            color: UIColors.textcolor,
+                          ),
+                        ),
+                        Text(
+                          'End Time: ${item.startTime}',
+                          style: TextStyle(
+                            fontSize: ResponsiveFlutter.of(context).fontSize(2),
+                            color: UIColors.textcolor,
+                          ),
+                        ),
+                        Text(
+                          'End Date: ${item.endDate} ',
+                          style: TextStyle(
+                            fontSize: ResponsiveFlutter.of(context).fontSize(2),
+                            color: UIColors.textcolor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

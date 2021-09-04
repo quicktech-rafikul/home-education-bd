@@ -60,12 +60,11 @@ class _QuickTechIT_MoreState extends State<QuickTechIT_More> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomBar(),
-      backgroundColor: UIColors.backgroundColor2,
+      backgroundColor: UIColors.bgc1,
       body: Container(
         child: Column(
           children: [
@@ -88,14 +87,22 @@ class _QuickTechIT_MoreState extends State<QuickTechIT_More> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      FractionallySizedBox(widthFactor: .8,child: Image.asset('assets/images/logo.png')),
+                                      FractionallySizedBox(
+                                        widthFactor: .8,
+                                        child: Container(
+                                          height: 120,
+                                          child: Image.asset(
+                                              'assets/images/icon.png'),
+                                        ),
+                                      ),
                                       Text(
                                         localData.read('userName'),
                                         style: TextStyle(
                                             fontSize:
-                                            ResponsiveFlutter.of(context).fontSize(3.5),
+                                                ResponsiveFlutter.of(context)
+                                                    .fontSize(3.5),
                                             fontWeight: FontWeight.bold,
-                                            color: UIColors.primaryColor2),
+                                            color: UIColors.textcolor),
                                       ),
                                       SizedBox(
                                         height: 2,
@@ -113,7 +120,9 @@ class _QuickTechIT_MoreState extends State<QuickTechIT_More> {
                                       ),
                                     ],
                                   )),
-                              SizedBox(height: 20,),
+                              SizedBox(
+                                height: 20,
+                              ),
                               Container(
                                 padding: EdgeInsets.all(20),
                                 child: Column(
@@ -130,12 +139,15 @@ class _QuickTechIT_MoreState extends State<QuickTechIT_More> {
                                               margin: EdgeInsets.all(8),
                                               decoration: BoxDecoration(
                                                 color: Colors.white,
-                                                borderRadius: BorderRadius.circular(10),
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
                                                 boxShadow: [
                                                   BoxShadow(
-                                                    color: Colors.grey.withOpacity(.5),
+                                                    color: Colors.grey
+                                                        .withOpacity(.5),
                                                     blurRadius: 4,
-                                                    offset: Offset(4, 4), // changes position of shadow
+                                                    offset: Offset(4,
+                                                        4), // changes position of shadow
                                                   ),
                                                 ],
                                               ),
@@ -143,9 +155,9 @@ class _QuickTechIT_MoreState extends State<QuickTechIT_More> {
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.min,
                                                 crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                                    CrossAxisAlignment.center,
                                                 mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   Icon(Icons.question_answer),
                                                   SizedBox(
@@ -157,12 +169,15 @@ class _QuickTechIT_MoreState extends State<QuickTechIT_More> {
                                             ),
                                           ),
                                         ),
-                                        SizedBox(width: 10,),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
                                         Expanded(
                                           flex: 1,
                                           child: InkWell(
                                             onTap: () {
-                                              AppReview.storeListing.then((onValue) {
+                                              AppReview.storeListing
+                                                  .then((onValue) {
                                                 setState(() {
                                                   output = onValue;
                                                 });
@@ -172,12 +187,15 @@ class _QuickTechIT_MoreState extends State<QuickTechIT_More> {
                                               margin: EdgeInsets.all(8),
                                               decoration: BoxDecoration(
                                                 color: Colors.white,
-                                                borderRadius: BorderRadius.circular(10),
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
                                                 boxShadow: [
                                                   BoxShadow(
-                                                    color: Colors.grey.withOpacity(.5),
+                                                    color: Colors.grey
+                                                        .withOpacity(.5),
                                                     blurRadius: 4,
-                                                    offset: Offset(4, 4), // changes position of shadow
+                                                    offset: Offset(4,
+                                                        4), // changes position of shadow
                                                   ),
                                                 ],
                                               ),
@@ -185,9 +203,9 @@ class _QuickTechIT_MoreState extends State<QuickTechIT_More> {
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.min,
                                                 crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                                    CrossAxisAlignment.center,
                                                 mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   Icon(Icons.rate_review),
                                                   SizedBox(
@@ -201,11 +219,13 @@ class _QuickTechIT_MoreState extends State<QuickTechIT_More> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(height: 20,),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
                                     Align(
                                       alignment: Alignment.center,
                                       child: Container(
-                                        width: Get.width/2.5,
+                                        width: Get.width / 2.5,
                                         child: InkWell(
                                           onTap: () {
                                             AuthController().signOut();
@@ -214,12 +234,15 @@ class _QuickTechIT_MoreState extends State<QuickTechIT_More> {
                                             margin: EdgeInsets.all(8),
                                             decoration: BoxDecoration(
                                               color: Colors.white,
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                               boxShadow: [
                                                 BoxShadow(
-                                                  color: Colors.grey.withOpacity(.5),
+                                                  color: Colors.grey
+                                                      .withOpacity(.5),
                                                   blurRadius: 4,
-                                                  offset: Offset(4, 4), // changes position of shadow
+                                                  offset: Offset(4,
+                                                      4), // changes position of shadow
                                                 ),
                                               ],
                                             ),
@@ -227,12 +250,11 @@ class _QuickTechIT_MoreState extends State<QuickTechIT_More> {
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                                  CrossAxisAlignment.center,
                                               mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                                  MainAxisAlignment.center,
                                               children: [
-                                                Icon(Icons
-                                                    .logout),
+                                                Icon(Icons.logout),
                                                 SizedBox(
                                                   height: 5,
                                                 ),
@@ -282,8 +304,9 @@ class _QuickTechIT_MoreState extends State<QuickTechIT_More> {
                         child: Text(
                           'QuickTech IT',
                           style: TextStyle(
-                            fontSize: ResponsiveFlutter.of(context).fontSize(1.8),
-                            color: Colors.black,
+                            fontSize:
+                                ResponsiveFlutter.of(context).fontSize(1.8),
+                            color: UIColors.textcolor,
                           ),
                         ),
                       ),

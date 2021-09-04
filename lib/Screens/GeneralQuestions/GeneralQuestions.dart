@@ -14,10 +14,12 @@ import 'package:responsive_flutter/responsive_flutter.dart';
 
 class QuickTechIT_GeneralQuestions extends StatefulWidget {
   @override
-  _QuickTechIT_GeneralQuestionsState createState() => _QuickTechIT_GeneralQuestionsState();
+  _QuickTechIT_GeneralQuestionsState createState() =>
+      _QuickTechIT_GeneralQuestionsState();
 }
 
-class _QuickTechIT_GeneralQuestionsState extends State<QuickTechIT_GeneralQuestions> {
+class _QuickTechIT_GeneralQuestionsState
+    extends State<QuickTechIT_GeneralQuestions> {
   final _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   List<GeneralQuestionModel> ques = [];
@@ -43,7 +45,7 @@ class _QuickTechIT_GeneralQuestionsState extends State<QuickTechIT_GeneralQuesti
           padding: EdgeInsets.all(15),
           icon: Icon(
             Icons.arrow_back_ios_rounded,
-            color: UIColors.primaryColor2,
+            color: UIColors.textcolor,
             size: 20,
           ),
           onPressed: () {
@@ -54,10 +56,10 @@ class _QuickTechIT_GeneralQuestionsState extends State<QuickTechIT_GeneralQuesti
           'General Questions',
           style: TextStyle(
             fontSize: ResponsiveFlutter.of(context).fontSize(3),
-            color: UIColors.primaryColor,
+            color: UIColors.textcolor,
           ),
         ),
-        backgroundColor: UIColors.backgroundColor,
+        backgroundColor: UIColors.bgc1,
         elevation: 0.0,
         // actions: <Widget>[
         //   IconButton(
@@ -74,7 +76,7 @@ class _QuickTechIT_GeneralQuestionsState extends State<QuickTechIT_GeneralQuesti
       ),
       // endDrawer: NavigationDrawer(),
       bottomNavigationBar: BottomBar(),
-      backgroundColor: UIColors.backgroundColor,
+      backgroundColor: UIColors.bgc1,
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
@@ -105,17 +107,21 @@ class _QuickTechIT_GeneralQuestionsState extends State<QuickTechIT_GeneralQuesti
               item.question,
               style: TextStyle(
                   fontSize: ResponsiveFlutter.of(context).fontSize(2.2),
+                  color: UIColors.textcolor,
                   fontWeight: FontWeight.bold),
               textAlign: TextAlign.justify,
             ),
+          ),
+          SizedBox(
+            height: 10,
           ),
           Container(
             width: Get.width,
             child: Text(
               item.answer,
               style: TextStyle(
-                fontSize: ResponsiveFlutter.of(context).fontSize(2.2),
-              ),
+                  fontSize: ResponsiveFlutter.of(context).fontSize(2.2),
+                  color: UIColors.textcolor),
               textAlign: TextAlign.justify,
             ),
           ),

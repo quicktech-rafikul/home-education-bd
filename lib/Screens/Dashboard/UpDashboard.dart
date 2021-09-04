@@ -14,8 +14,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_flutter/responsive_flutter.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:flutter/services.dart';
 
 // ignore: camel_case_types
 class QuickTechIT_UpDashboard extends StatefulWidget {
@@ -209,20 +207,13 @@ class _QuickTechIT_UpDashboardState extends State<QuickTechIT_UpDashboard> {
                                     Spacer(),
                                     InkWell(
                                       onTap: () {
-                                        courseDialog();
+                                        Get.toNamed('/more');
                                       },
                                       child: Container(
                                         child: Row(
                                           children: [
-                                            Text(
-                                              'Course',
-                                              style: TextStyle(
-                                                color: UIColors.textcolor,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
                                             Icon(
-                                              Icons.subject,
+                                              Icons.menu,
                                               color: UIColors.textcolor,
                                             ),
                                           ],
@@ -231,6 +222,9 @@ class _QuickTechIT_UpDashboardState extends State<QuickTechIT_UpDashboard> {
                                     ),
                                   ],
                                 ),
+                              ),
+                              SizedBox(
+                                height: 10,
                               ),
                               Padding(
                                 padding:
@@ -252,7 +246,9 @@ class _QuickTechIT_UpDashboardState extends State<QuickTechIT_UpDashboard> {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 10),
+                              SizedBox(
+                                height: 10,
+                              ),
                               Container(
                                 child: Column(
                                   children: [
@@ -294,9 +290,9 @@ class _QuickTechIT_UpDashboardState extends State<QuickTechIT_UpDashboard> {
                                         } else {
                                           return CarouselSlider(
                                             options: CarouselOptions(
-                                              height: 160.0,
+                                              height: 130.0,
                                               enlargeCenterPage: true,
-                                              autoPlay: false,
+                                              autoPlay: true,
                                               aspectRatio: 16 / 9,
                                               autoPlayCurve:
                                                   Curves.fastOutSlowIn,
@@ -316,6 +312,71 @@ class _QuickTechIT_UpDashboardState extends State<QuickTechIT_UpDashboard> {
                                           );
                                         }
                                       },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 10, right: 10),
+                                child: Container(
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Runnig Exams",
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: UIColors.textcolor,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Spacer(),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                width: Get.width,
+                                decoration: BoxDecoration(
+                                  color: UIColors.bgc2,
+                                  borderRadius: BorderRadius.circular(0),
+                                ),
+                                padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Text(
+                                        courseName,
+                                        style: TextStyle(
+                                            fontSize:
+                                                ResponsiveFlutter.of(context)
+                                                    .fontSize(2),
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                    TextButton(
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  UIColors.primaryColor),
+                                          padding: MaterialStateProperty.all(
+                                              EdgeInsets.fromLTRB(5, 5, 5, 5))),
+                                      onPressed: () {
+                                        courseDialog();
+                                      },
+                                      child: Text(
+                                        "Select",
+                                        style: TextStyle(
+                                            color: UIColors.textcolor),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -358,64 +419,87 @@ class _QuickTechIT_UpDashboardState extends State<QuickTechIT_UpDashboard> {
   }
 
   examItemUI(CentralTestExamModel item) {
-    return Container(
+    return InkWell(
+      onTap: () {
+        Get.toNamed('/examPage/central/${item.id}');
+      },
       child: Container(
-        color: UIColors.bgc2,
-        padding: EdgeInsets.all(8),
-        child: new Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: Get.width,
-              child: Text(
-                item.examName,
-                style: TextStyle(
-                    fontSize: ResponsiveFlutter.of(context).fontSize(2.5),
-                    color: UIColors.textcolor,
-                    fontWeight: FontWeight.bold),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          gradient: LinearGradient(
+            colors: [
+              const Color(0xFF485563),
+              const Color(0xFF596164),
+            ],
+            begin: const FractionalOffset(0.0, 0.5),
+            end: const FractionalOffset(1.5, 0.0),
+            stops: [0.0, 1.0],
+            tileMode: TileMode.mirror,
+          ),
+        ),
+        child: Container(
+          //color: UIColors.bgc2,
+          padding: EdgeInsets.only(top: 10, left: 20),
+          child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: Get.width,
+                child: Center(
+                  child: Text(
+                    item.examName,
+                    style: TextStyle(
+                        fontSize: ResponsiveFlutter.of(context).fontSize(2.5),
+                        color: UIColors.textcolor,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'End Date: ${item.endDate}',
-                  style: TextStyle(
-                    fontSize: ResponsiveFlutter.of(context).fontSize(2),
-                    color: UIColors.textcolor,
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Mark: ${item.totalMark}',
+                          style: TextStyle(
+                            fontSize: ResponsiveFlutter.of(context).fontSize(2),
+                            color: UIColors.textcolor,
+                          ),
+                        ),
+                        Text(
+                          'Eaxm Duration: ${item.duration} Minutes',
+                          style: TextStyle(
+                            fontSize: ResponsiveFlutter.of(context).fontSize(2),
+                            color: UIColors.textcolor,
+                          ),
+                        ),
+                        Text(
+                          'End Time: ${item.startTime}',
+                          style: TextStyle(
+                            fontSize: ResponsiveFlutter.of(context).fontSize(2),
+                            color: UIColors.textcolor,
+                          ),
+                        ),
+                        Text(
+                          'End Date: ${item.endDate} ',
+                          style: TextStyle(
+                            fontSize: ResponsiveFlutter.of(context).fontSize(2),
+                            color: UIColors.textcolor,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Mark: ${item.totalMark}',
-                        style: TextStyle(
-                          fontSize: ResponsiveFlutter.of(context).fontSize(2),
-                          color: UIColors.textcolor,
-                        ),
-                      ),
-                      Text(
-                        'Eaxm Duration: ${item.duration}',
-                        style: TextStyle(
-                          fontSize: ResponsiveFlutter.of(context).fontSize(2),
-                          color: UIColors.textcolor,
-                        ),
-                      ),
-                      Text(
-                        'Start Time: ${item.startTime}',
-                        style: TextStyle(
-                          fontSize: ResponsiveFlutter.of(context).fontSize(2),
-                          color: UIColors.textcolor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
